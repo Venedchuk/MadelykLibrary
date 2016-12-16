@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MadelykLibrary"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="600" Width="600">
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="/MadelykLibrary/background.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
     </Grid>
 </Window>

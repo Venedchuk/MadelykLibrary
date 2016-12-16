@@ -23,6 +23,19 @@ namespace MadelykLibrary
         public MainWindow()
         {
             InitializeComponent();
+
+            using (var db = new LibraryContext())
+            {
+                //db.Categorys.Add(new Category() {Id=Guid.NewGuid(),CategoryName="Adventure",Description="Description"});
+                db.Authors.Add(new Author() {Id=Guid.NewGuid(),Name="Belyaev" });
+                foreach (var item in db.Authors)
+                {
+                    Console.WriteLine(item.Name);
+
+                }
+                
+                db.SaveChanges();
+            }
         }
     }
 }
