@@ -1,46 +1,47 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
+using System.Windows.Media.Imaging;
+using GalaSoft.MvvmLight;
 
-namespace MadelykLibrary
+namespace MadelykLibrary.Model
 {
-    public class Category
+    public class CategoryObs : ObservableObject
     {
-        [Key]
         public Guid Id { get; set; }
         public string CategoryName { get; set; }
         public string Description { get; set; }
     }
-    public class Book
+    public class BookObs : ObservableObject
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
         public int Count { get; set; }
-        public virtual Category Categoty { get; set; }
-        public virtual Author Author { get; set; }
+        public Guid CategotyID { get; set; }
+        public Guid AuthorId { get; set; }
     }
-    public class Cart
+    public class CartObs : ObservableObject
     {
         public Guid Id { get; set; }
-        public virtual Book Book { get; set; }
-        public virtual Reader Reader { get; set; }
-        public  DateTime Start_reading { get; set; }
+        public Guid  BookId { get; set; }
+        public Guid ReaderId { get; set; }
+        public DateTime Start_reading { get; set; }
         public DateTime? Finish_reading { get; set; }
         public string Status { get; set; }
     }
-    public class Author
+    public class AuthorObs : ObservableObject
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
     }
-    public class Reader
+    public class ReaderObs : ObservableObject
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public virtual Adress Adress { get; set; }
+        public Guid AdressId { get; set; }
     }
-    public class Adress
+    public class AdressObs : ObservableObject
     {
         public Guid Id { get; set; }
         public string City { get; set; }

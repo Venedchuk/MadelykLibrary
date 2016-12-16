@@ -1,14 +1,91 @@
-﻿<Window x:Class="MadelykLibrary.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MadelykLibrary"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="600">
-    <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/MadelykLibrary/background.jpg" Stretch="UniformToFill"/>
-        </Grid.Background>
+﻿<Window
+    x:Class="MadelykLibrary.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:nmsp="clr-namespace:MadelykLibrary"
+    Title="Library Redactor"
+    Width="488.667"
+    Height="600"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <ImageBrush x:Key="MyImageBrush" ImageSource="D:\Projects\MadelykLibrary\MadelykLibrary\background.png" />
+    </Window.Resources>
+    <Window.DataContext>
+        <nmsp:MainWindowRedactorViewModel />
+    </Window.DataContext>
+
+    <Grid Background="{StaticResource MyImageBrush}">
+
+        <Grid
+            Width="396"
+            Height="124"
+            Margin="64,17,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+            <Button
+                x:Name="label"
+                Width="114"
+                Height="34"
+                Margin="96,49,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding AddAuthor}"
+                Content="Add"
+                FontFamily="Palatino Linotype"
+                FontSize="18" />
+            <TextBox
+                x:Name="textBox"
+                Width="120"
+                Height="28"
+                Margin="266,10,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="#AAAAAAAA"
+                FlowDirection="RightToLeft"
+                Text="{Binding AddAuthorName}"
+                TextAlignment="Center"
+                TextWrapping="Wrap" />
+            <TextBox
+                x:Name="textBox_Copy"
+                Width="120"
+                Height="28"
+                Margin="266,49,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="#AAAAAAAA"
+                FlowDirection="RightToLeft"
+                Text="{Binding AddAuthorSurname}"
+                TextAlignment="Center"
+                TextWrapping="Wrap" />
+            <Label
+                x:Name="label1"
+                Width="210"
+                Height="34"
+                Margin="10,10,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Create new Author"
+                FontFamily="Yu Mincho Demibold"
+                FontSize="18" />
+            <Label
+                x:Name="label2"
+                Width="162"
+                Height="29"
+                Margin="48,85,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="{Binding AddAuthorInfo}"
+                FontFamily="Sylfaen"
+                FontSize="14"
+                FontWeight="Bold"
+                Foreground="#FFFF0B0B" />
+        </Grid>
     </Grid>
 </Window>
