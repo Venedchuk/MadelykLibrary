@@ -15,7 +15,7 @@ namespace MadelykLibrary
         public Guid Id { get; set; }
         public string Name { get; set; }
         public int Count { get; set; }
-        public virtual Category Categoty { get; set; }
+        public virtual Category Category { get; set; }
         public virtual Author Author { get; set; }
     }
     public class Cart
@@ -45,6 +45,6 @@ namespace MadelykLibrary
         public Guid Id { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
-        public int? House_number { get; set; }
+        public string House_number { get; set; }
     }
 }

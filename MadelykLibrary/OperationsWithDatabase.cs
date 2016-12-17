@@ -43,9 +43,23 @@ namespace MadelykLibrary
         {
             using (var db = new LibraryContext())
             {
-                book.Categoty = db.Categorys.ToList().Find(x => x.Id == book.Categoty.Id);
+                book.Category = db.Categorys.ToList().Find(x => x.Id == book.Category.Id);
                 book.Author = db.Authors.ToList().Find(x => x.Id == book.Author.Id);
                 db.Books.Add(book);
+                db.SaveChanges();
+            }
+        }
+        public void AddReader(Reader reader, Adress adress)
+        {
+            using (var db = new LibraryContext())
+            {
+                adress.Id = Guid.NewGuid();
+                db.Adresses.Add(adress);
+
+                db.SaveChanges();
+                reader.Id = Guid.NewGuid();
+                reader.Adress = db.Adresses.ToList().Find(x =>x.Id == adress.Id);
+                db.Readers.Add(reader);
                 db.SaveChanges();
             }
         }

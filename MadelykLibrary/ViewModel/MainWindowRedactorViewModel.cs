@@ -27,10 +27,7 @@ namespace MadelykLibrary
         }
         public string AddAuthorName { get; set; }
         public string AddAuthorSurname { get; set; }
-
-
         private RelayCommand _addAuthor;
-
         public RelayCommand AddAuthor
         {
             get
@@ -64,14 +61,9 @@ namespace MadelykLibrary
         }
 
 
-
-
         public string AddBookName { get; set; }
-
         public int countbook { get; set; }
-
         private RelayCommand _addBook;
-
         public RelayCommand AddBook
         {
             get
@@ -84,11 +76,11 @@ namespace MadelykLibrary
                         Id = Guid.NewGuid(),
                         Name = AddBookName,
                         Count = countbook,
-                        Categoty = new Category(),
+                        Category = new Category(),
                         Author = new Author()
 
                     };
-                    book.Categoty.Id = SelectedCategory.Id;
+                    book.Category.Id = SelectedCategory.Id;
                     book.Author.Id = SelectedAuthor.Id;
                     connect.AddBook(book);
                     RaisePropertyChanged("AddBookInfo");
@@ -97,7 +89,6 @@ namespace MadelykLibrary
             }
         }
         private string _addBookInfo;
-
         public string AddBookInfo
         {
             get { return _addBookInfo; }
@@ -113,7 +104,6 @@ namespace MadelykLibrary
 
 
         private Category _selectedCategory;
-
         public Category SelectedCategory
         {
             get { return _selectedCategory; }
@@ -126,9 +116,7 @@ namespace MadelykLibrary
 
             }
         }
-
         private Author _selectedAuthor;
-
         public Author SelectedAuthor
         {
             get { return _selectedAuthor; }
@@ -142,6 +130,39 @@ namespace MadelykLibrary
             }
         }
 
+        public string AddReaderName { get; set; }
+        public string AddReaderSurname { get; set; }
+        public string AddReaderCity { get; set; }
+        public string AddReaderStreet { get; set; }
+        public string AddReaderNumber { get; set; }
+        public string AddReaderInfo { get; set; }
+        private RelayCommand _addReader;
+        public RelayCommand AddReader
+        {
+            get
+            {
+                return _addReader ?? (_addReader = new RelayCommand(() =>
+                {
+                    AddReaderInfo = $"Added Reader : {AddReaderName} {AddReaderSurname}";
+                    var reader = new Reader()
+                    {
+                        Name = AddReaderName,
+                        Surname = AddReaderSurname,
+  
+                    };
+                    var adress = new Adress()
+                    {
+                        City = AddReaderCity,
+                        Street = AddReaderStreet,
+                        House_number = AddReaderNumber
+                    };
+                 //   reader.Adress = adress;
+                    connect.AddReader(reader,adress);
+                    RaisePropertyChanged("AddReaderInfo");
+                }, () => (AddReaderName != null && AddReaderSurname != null && AddReaderStreet != null && AddReaderNumber != null )));
+
+            }
+        }
 
 
 

@@ -25,20 +25,20 @@
             <Grid
                 Width="397"
                 Height="116"
-                Margin="-6,8,0,-2"
+                Margin="4,8,-2,-2"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top">
-                <Button
-                    x:Name="label"
-                    Width="114"
+                <Label
+                    x:Name="label1"
+                    Width="210"
                     Height="34"
-                    Margin="10,49,0,0"
+                    Margin="10,4,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Command="{Binding AddAuthor}"
-                    Content="Add"
-                    FontFamily="Palatino Linotype"
+                    Content="Add new Author"
+                    FontFamily="Yu Mincho Demibold"
                     FontSize="18" />
+
                 <TextBox
                     x:Name="textBox"
                     Width="120"
@@ -67,15 +67,16 @@
                     Text="{Binding AddAuthorSurname}"
                     TextAlignment="Center"
                     TextWrapping="Wrap" />
-                <Label
-                    x:Name="label1"
-                    Width="210"
+                <Button
+                    x:Name="label"
+                    Width="114"
                     Height="34"
-                    Margin="10,4,0,0"
+                    Margin="10,49,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Content="Add new Author"
-                    FontFamily="Yu Mincho Demibold"
+                    Command="{Binding AddAuthor}"
+                    Content="Add"
+                    FontFamily="Palatino Linotype"
                     FontSize="18" />
                 <Label
                     x:Name="label2"
@@ -118,17 +119,7 @@
                 Margin="4,-2,-2,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top">
-                <Button
-                    x:Name="label3"
-                    Width="114"
-                    Height="34"
-                    Margin="37,43,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Command="{Binding AddBook}"
-                    Content="Add"
-                    FontFamily="Palatino Linotype"
-                    FontSize="18" />
+
                 <TextBox
                     x:Name="textBox1"
                     Width="120"
@@ -141,6 +132,20 @@
                     Background="#AAAAAAAA"
                     FlowDirection="RightToLeft"
                     Text="{Binding AddBookName}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+                <TextBox
+                    x:Name="textBox1_Copy"
+                    Width="120"
+                    Height="26"
+                    Margin="266,45,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="#AAAAAAAA"
+                    FlowDirection="RightToLeft"
+                    Text="{Binding countbook}"
                     TextAlignment="Center"
                     TextWrapping="Wrap" />
                 <ComboBox
@@ -157,7 +162,31 @@
                     FlowDirection="RightToLeft"
                     ItemsSource="{Binding Path=Categories}"
                     SelectedItem="{Binding Path=SelectedCategory}" />
-
+                <ComboBox
+                    x:Name="textBox_Copy2"
+                    Width="120"
+                    Height="28"
+                    Margin="266,112,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="#AAAAAAAA"
+                    DisplayMemberPath="Surname"
+                    FlowDirection="RightToLeft"
+                    ItemsSource="{Binding Authors}"
+                    SelectedItem="{Binding SelectedAuthor}" />
+                <Button
+                    x:Name="label3"
+                    Width="114"
+                    Height="34"
+                    Margin="10,45,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Command="{Binding AddBook}"
+                    Content="Add"
+                    FontFamily="Palatino Linotype"
+                    FontSize="18" />
                 <Label
                     x:Name="label4"
                     Width="210"
@@ -204,34 +233,8 @@
                     VerticalAlignment="Top"
                     Content="author:"
                     FontWeight="Bold" />
-                <ComboBox
-                    x:Name="textBox_Copy2"
-                    Width="120"
-                    Height="28"
-                    Margin="266,112,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    Background="#AAAAAAAA"
-                    DisplayMemberPath="Surname"
-                    FlowDirection="RightToLeft"
-                    ItemsSource="{Binding Authors}"
-                    SelectedItem="{Binding SelectedAuthor}" />
-                <TextBox
-                    x:Name="textBox1_Copy"
-                    Width="120"
-                    Height="26"
-                    Margin="266,45,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    Background="#AAAAAAAA"
-                    FlowDirection="RightToLeft"
-                    Text="{Binding countbook}"
-                    TextAlignment="Center"
-                    TextWrapping="Wrap" />
+
+
                 <Label
                     x:Name="label6_Copy4"
                     Width="63"
@@ -240,6 +243,174 @@
                     VerticalAlignment="Top"
                     Content="category:"
                     FontWeight="Bold" />
+            </Grid>
+        </Border>
+        <Border
+            Margin="59,320,19,10"
+            BorderBrush="Black"
+            BorderThickness="2">
+            <Grid
+                Width="397"
+                Height="239"
+                Margin="4,-2,-2,-2"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
+                <Label
+                    x:Name="label7"
+                    Width="210"
+                    Height="34"
+                    Margin="10,4,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Add new Reader"
+                    FontFamily="Yu Mincho Demibold"
+                    FontSize="18" />
+
+                <TextBox
+                    x:Name="textBox2"
+                    Width="120"
+                    Height="28"
+                    Margin="266,10,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="#AAAAAAAA"
+                    FlowDirection="RightToLeft"
+                    Text="{Binding AddReaderName}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+                <TextBox
+                    x:Name="textBox_Copy3"
+                    Width="120"
+                    Height="28"
+                    Margin="266,49,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="#AAAAAAAA"
+                    FlowDirection="RightToLeft"
+                    Text="{Binding AddReaderSurname}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+                <TextBox
+                    x:Name="textBox_Copy4"
+                    Width="120"
+                    Height="28"
+                    Margin="267,88,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="#AAAAAAAA"
+                    FlowDirection="RightToLeft"
+                    Text="{Binding AddReaderCity}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+                <TextBox
+                    x:Name="textBox_Copy5"
+                    Width="120"
+                    Height="28"
+                    Margin="267,126,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="#AAAAAAAA"
+                    FlowDirection="RightToLeft"
+                    Text="{Binding AddReaderStreet}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+                <TextBox
+                    x:Name="textBox_Copy6"
+                    Width="120"
+                    Height="28"
+                    Margin="267,167,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="#AAAAAAAA"
+                    FlowDirection="RightToLeft"
+                    Text="{Binding AddReaderNumber}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+                <!--<PasswordBox
+                    x:Name="pwdBox"
+                    Width="120"
+                    Height="28"
+                    Margin="267,201,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="#AAAAAAAA"
+                    FlowDirection="RightToLeft" />-->
+                <Button
+                    x:Name="label8"
+                    Width="114"
+                    Height="34"
+                    Margin="10,49,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Command="{Binding AddReader}"
+                    Content="Add"
+                    FontFamily="Palatino Linotype"
+                    FontSize="18" />
+                <Label
+                    x:Name="label9"
+                    Width="182"
+                    Height="66"
+                    Margin="10,88,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="{Binding AddReaderInfo}"
+                    FontFamily="Sylfaen"
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Foreground="#FFFF0B0B" />
+                <Label
+                    x:Name="label10"
+                    Width="41"
+                    Margin="210,12,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="name:"
+                    FontWeight="Bold" />
+                <Label
+                    x:Name="label6_Copy5"
+                    Width="62"
+                    Margin="204,51,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="surname:"
+                    FontWeight="Bold" />
+                <Label
+                    x:Name="label6_Copy6"
+                    Width="57"
+                    Margin="210,87,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="city:"
+                    FontWeight="Bold" />
+                <Label
+                    x:Name="label6_Copy7"
+                    Width="57"
+                    Margin="210,128,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="street:"
+                    FontWeight="Bold" />
+                <Label
+                    x:Name="label6_Copy8"
+                    Width="57"
+                    Margin="210,167,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="number:"
+                    FontWeight="Bold" />
+
             </Grid>
         </Border>
     </Grid>
