@@ -1,12 +1,18 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using MadelykLibrary.Model;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace MadelykLibrary
 {
@@ -18,11 +24,14 @@ namespace MadelykLibrary
         public ObservableCollection<Book> BooksFromCategory { get; set; }
         
         public ObservableCollection<Book> Books { get; set; }
+        public ObservableCollection<Book> BooksWhatReading { get; set; }
+        public ObservableCollection<CartObs> CartGrid { get; set; }
 
         public MainWindowRedactorViewModel()
         {
             Update();
             Books = new ObservableCollection<Book>(connect.GetAllBooks());
+            
         }
 
         private void Update()
@@ -77,6 +86,32 @@ namespace MadelykLibrary
             }
         }
 
+        private string _getBookInfo;
+        public string GetBookInfo
+        {
+            get { return _getBookInfo; }
+            set
+            {
+                if (_getBookInfo == value) return;
+                _getBookInfo = value;
+
+                RaisePropertyChanged("GetBookInfo");
+
+            }
+        }
+        private string _getBookPrint;
+        public string GetBookPrint
+        {
+            get { return _getBookPrint; }
+            set
+            {
+                if (_getBookPrint == value) return;
+                _getBookPrint = value;
+
+                RaisePropertyChanged("GetBookPrint");
+
+            }
+        }
 
         public string AddBookName { get; set; }
         public int countbook { get; set; }
@@ -119,6 +154,30 @@ namespace MadelykLibrary
 
             }
         }
+        private string _readerNamePrint;
+        public string ReaderNamePrint
+        {
+            get { return _readerNamePrint; }
+            set
+            {
+                if (_readerNamePrint == value) return;
+                _readerNamePrint = value;
+                RaisePropertyChanged("ReaderNamePrint");
+            }
+        }
+        public string ReaderSurNamePrint { get; set; }
+
+        private string _printInfo;
+        public string PrintInfo
+        {
+            get { return _printInfo; }
+            set
+            {
+                if (_printInfo == value) return;
+                _printInfo = value;
+                RaisePropertyChanged("PrintInfo");
+            }
+        }
 
 
         private Category _selectedCategory;
@@ -154,6 +213,9 @@ namespace MadelykLibrary
         public string AddReaderStreet { get; set; }
         public string AddReaderNumber { get; set; }
         public string AddReaderInfo { get; set; }
+        public string AddReaderNameForReturnBook { get; set; }
+        public string AddReaderSurNameForReturnBook { get; set; }
+
         private RelayCommand _addReader;
         public RelayCommand AddReader
         {
@@ -223,8 +285,8 @@ namespace MadelykLibrary
         }
 
 
-        private Category _selectedBook;
-        public Category SelectedBook
+        private Book _selectedBook;
+        public Book SelectedBook
         {
             get { return _selectedBook; }
             set
@@ -260,24 +322,134 @@ namespace MadelykLibrary
                 return _getBook ?? (_getBook = new RelayCommand(() =>
                 {
 
-                    //CheckExistUserAndBook(AddAuthorNameForGetBook,AddAuthorSurNameForGetBook,SelectedBook);
-                    AddAuthorInfo = "Have a nice read:"+Environment.NewLine + Books;
-                    var book = new Book()
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = AddBookName,
-                        Count = countbook,
-                        Category = new Category(),
-                        Author = new Author()
 
-                    };
-                    book.Category.Id = SelectedCategory.Id;
-                    book.Author.Id = SelectedAuthor.Id;
-                    connect.AddBook(book);
-                    Update();
+                    AddAuthorInfo = connect.CheckExistUserAndBook(AddAuthorNameForGetBook, AddAuthorSurNameForGetBook, SelectedBook);
                     RaisePropertyChanged("AddAuthorInfo");
-                }, () => (AddBookName != null )));
+                    if (AddAuthorInfo== "Have a nice read")
+                    {
+                        connect.GiveMeRead(SelectedBook, AddAuthorNameForGetBook, AddAuthorSurNameForGetBook);
+                    }
+
+                    Update();
+
+                }, () => (SelectedBook != null )));
             }
         }
+
+        private RelayCommand _returnBook;
+        public RelayCommand ReturnBook
+        {
+            get
+            {
+                return _returnBook ?? (_returnBook = new RelayCommand(() =>
+                {
+
+                    connect.ReturnBook(AddReaderNameForReturnBook, AddReaderSurNameForReturnBook, SelectedBookForGive);
+                    Update();
+
+                    GetBookInfo = "Book returned";
+                    RaisePropertyChanged("GetBookInfo");
+                    BooksWhatReading = new ObservableCollection<Book>();
+                    RaisePropertyChanged("BooksWhatReading");
+                    SelectedBookForGive = null;
+                    RaisePropertyChanged("SelectedBookForGive");
+
+                }, () => (SelectedBookForGive != null)));
+            }
+        }
+        
+        private RelayCommand _findBookWhatReading;
+        public RelayCommand FindBookWhatReading
+        {
+            get
+            {
+                return _findBookWhatReading ?? (_findBookWhatReading = new RelayCommand(() =>
+                {
+                    if (connect.CheckUser(AddReaderNameForReturnBook, AddReaderSurNameForReturnBook))
+                    {
+                        BooksWhatReading = connect.GetBookWhatReading(AddReaderNameForReturnBook, AddReaderSurNameForReturnBook);
+                        RaisePropertyChanged("BooksWhatReading");
+                        GetBookInfo = "Find user";
+                    }
+                    else
+                    {
+                        GetBookInfo = "Wrong User";
+                    }
+                    RaisePropertyChanged("GetBookInfo");
+                    Update();
+
+                }, () => (AddReaderNameForReturnBook != null && AddReaderSurNameForReturnBook != null)));
+            }
+        }
+
+
+        private Book _selectedBookForGive;
+        public Book SelectedBookForGive
+        {
+            get { return _selectedBookForGive; }
+            set
+            {
+                if (_selectedBookForGive == value) return;
+                _selectedBookForGive = value;
+
+                RaisePropertyChanged("SelectedBookForGive");
+
+            }
+        }
+
+
+        private RelayCommand _printCart;
+        public RelayCommand PrintCart
+        {
+            get
+            {
+                return _printCart ?? (_printCart = new RelayCommand(() =>
+                {
+
+                  
+
+
+                } ));
+
+            }
+        }
+        private bool _isReading;
+        public bool IsFinishRead
+        {
+            get { return _isReading; }
+            set
+            {
+                if (_isReading == value) return;
+
+                _isReading = value;
+
+                RaisePropertyChanged("IsFinishRead");
+            }
+        }
+
+         private RelayCommand _getStat;
+        public RelayCommand GetStat
+        {
+            get
+            {
+                return _getStat ?? (_getStat = new RelayCommand(() =>
+                {
+                    if (connect.CheckUser(ReaderNamePrint, ReaderSurNamePrint))
+                    {
+                        CartGrid = connect.GetCartUser(ReaderNamePrint, ReaderSurNamePrint,IsFinishRead);
+                        RaisePropertyChanged("CartGrid");
+                        GetBookPrint = "Find user";
+                    }
+                    else
+                    {
+                        GetBookPrint = "Wrong User";
+                    }
+                    RaisePropertyChanged("GetStat");
+                    Update();
+
+                }, () => (ReaderNamePrint != null)));
+            }
+        }
+
     }
 }

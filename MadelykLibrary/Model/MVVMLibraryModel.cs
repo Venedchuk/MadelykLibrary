@@ -22,8 +22,7 @@ namespace MadelykLibrary.Model
     public class CartObs : ObservableObject
     {
         public Guid Id { get; set; }
-        public Guid  BookId { get; set; }
-        public Guid ReaderId { get; set; }
+        public string  BookName { get; set; }
         public DateTime Start_reading { get; set; }
         public DateTime? Finish_reading { get; set; }
         public string Status { get; set; }
