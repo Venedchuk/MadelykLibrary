@@ -43,8 +43,35 @@ namespace MadelykLibrary
     public class Adress
     {
         public Guid Id { get; set; }
+        public virtual Fillial Fillal { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
         public string House_number { get; set; }
+
+    }
+    public class Fillial
+    {
+        public Guid Id { get; set; }
+        public int Number { get; set; }
+        public virtual StatFillial Stat_Fillial { get; set; }
+    }
+    public class StatFillial
+    {
+        public Guid Id { get; set; }
+        public string FillialStat { get; set; }
+    }
+    public class Penny
+    {
+        public Guid Id { get; set; }
+        public virtual Cart Cart { get; set; }
+        public int Price { get; set; }
+        public virtual PennyStat penny { get; set; }
+    }
+    public class PennyStat
+    {
+        public Guid Id { get; set; }
+        public string Status { get; set; }
+        public int Count_Day_Min { get; set; }
+        public int Count_Day_Max { get; set; }
     }
 }
