@@ -26,6 +26,7 @@ namespace MadelykLibrary
         public  DateTime Start_reading { get; set; }
         public DateTime? Finish_reading { get; set; }
         public string Status { get; set; }
+        public virtual Penny penny { get; set; } 
     }
     public class Author
     {
@@ -53,6 +54,7 @@ namespace MadelykLibrary
     {
         public Guid Id { get; set; }
         public int Number { get; set; }
+        public string Name { get; set; }
         public virtual StatFillial Stat_Fillial { get; set; }
     }
     public class StatFillial
@@ -63,15 +65,15 @@ namespace MadelykLibrary
     public class Penny
     {
         public Guid Id { get; set; }
-        public virtual Cart Cart { get; set; }
+      //  public virtual Cart Cart { get; set; }
         public int Price { get; set; }
-        public virtual PennyStat penny { get; set; }
+        public virtual PennyStat pennyStat { get; set; }
     }
     public class PennyStat
     {
         public Guid Id { get; set; }
         public string Status { get; set; }
         public int Count_Day_Min { get; set; }
-        public int Count_Day_Max { get; set; }
+        public int? Count_Day_Max { get; set; }
     }
 }

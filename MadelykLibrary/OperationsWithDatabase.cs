@@ -3,14 +3,172 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 
 namespace MadelykLibrary
 {
     public class OperationsWithDatabase
     {
+        public void Initialize()
+        {
+            using (var db = new LibraryContext())
+            {
+                var statfil1 = new StatFillial()
+                {
+                    Id = Guid.NewGuid(),
+                    FillialStat = "Village"
+                };
+                db.StatFillial.Add(statfil1);
+                var statfil2 = new StatFillial()
+                {
+                    Id = Guid.NewGuid(),
+                    FillialStat = "town"
+                };
+                db.StatFillial.Add(statfil2);
+                var statfill3 = new StatFillial()
+                {
+                    Id = Guid.NewGuid(),
+                    FillialStat = "Magistery"
+                };
+                db.StatFillial.Add(statfill3);
+
+                var fill1 = new Fillial()
+                {
+                    Id = Guid.NewGuid(),
+                    Number = 1,
+                    Name="Young",
+                    Stat_Fillial = statfil1
+                };
+                db.Fillial.Add(fill1);
+
+                var fill2 = new Fillial()
+                {
+                    Id = Guid.NewGuid(),
+                    Number = 2,
+                    Name = "City",
+                    Stat_Fillial = statfil1
+                };
+                db.Fillial.Add(fill2);
+                var fill3 = new Fillial()
+                {
+                    Id = Guid.NewGuid(),
+                    Number = 3,
+                    Name = "Students",
+                    Stat_Fillial = statfil1
+                };
+                db.Fillial.Add(fill3);
+                var adr = new Adress()
+                {
+                    Id = Guid.NewGuid(),
+                    City = "Zhytomyr",
+                    Street = "Kyivs'ka",
+                    Fillal = fill1,
+                    House_number = "1"
+                };
+                db.Adresses.Add(adr);
+                var reader = new Reader()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Bogdan",
+                    Surname = "Madelyk",
+                    Adress = adr
+                };
+                db.Readers.Add(reader);
+                var category1 = new Category()
+                {
+                    Id = Guid.NewGuid(),
+                    CategoryName = "Tales",
+                    Description = "Tales for kids"
+                };
+                db.Categorys.Add(category1);
+                var author = new Author()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Belyaev",
+                    Surname = "Ivan"
+                };
+                db.Authors.Add(author);
+                var book = new Book()
+                {
+                    Id = Guid.NewGuid(),
+                    Author = author,
+                    Category = category1,
+                    Name = "Man-Amfibian",
+                    Count = 3
+                };
+                db.Books.Add(book);
+                var pennystat1 = new PennyStat()
+                {
+                    Id = Guid.NewGuid(),
+                    Status = "5 days",
+                    Count_Day_Min = 1,
+                    Count_Day_Max = 5,
+                };
+                db.PennyStat.Add(pennystat1);
+                var pennystat2 = new PennyStat()
+                {
+                    Id = Guid.NewGuid(),
+                    Status = "20 days",
+                    Count_Day_Min = 6,
+                    Count_Day_Max = 20,
+                };
+                db.PennyStat.Add(pennystat2);
+                var pennystat3 = new PennyStat()
+                {
+                    Id = Guid.NewGuid(),
+                    Status = "50 days",
+                    Count_Day_Min = 21,
+                    Count_Day_Max = 50,
+                };
+                db.PennyStat.Add(pennystat3);
+                var pennystat0 = new PennyStat()
+                {
+                    Id = Guid.NewGuid(),
+                    Status = "Reading",
+                    Count_Day_Min = 0,
+                };
+                db.PennyStat.Add(pennystat0);
+                var penny1 = new Penny()
+                {
+                    Id = Guid.NewGuid(),
+                    pennyStat = pennystat1,
+                    Price = 10
+                };
+                db.Penny.Add(penny1);
+                var penny2 = new Penny()
+                {
+                    Id = Guid.NewGuid(),
+                    pennyStat = pennystat2,
+                    Price = 30
+                };
+                db.Penny.Add(penny2);
+                var penny3 = new Penny()
+                {
+                    Id = Guid.NewGuid(),
+                    pennyStat = pennystat3,
+                    Price = 50
+                };
+                db.Penny.Add(penny3);
+                var penny0 = new Penny()
+                {
+                    Id = Guid.NewGuid(),
+                    pennyStat = pennystat0,
+                    Price = 0
+                };
+                db.Penny.Add(penny0);
+                var cart = new Cart()
+                {
+                    Id = Guid.NewGuid(),
+                    Book = book,
+                    Reader = reader,
+                    Start_reading = DateTime.Now,
+                    penny = penny0,
+                    Status = "Reading"
+                };
+                db.Carts.Add(cart);
+                db.SaveChanges();
+            }
+        }
 
         public void AddAuthor(Author a)
         {
@@ -26,9 +184,11 @@ namespace MadelykLibrary
         {
             using (var db = new LibraryContext())
             {
-               
+                if (db.Categorys != null)
+                    return db.Categorys.ToList();
 
-                return db.Categorys.ToList();
+                else
+                    return new List<Category>();
             }
         }
         public List<Author> GetAllAuthors()
@@ -37,6 +197,15 @@ namespace MadelykLibrary
             {
                 //var cat = new List<AuthorObs>();
                 var cat = db.Authors;
+                return cat.ToList();
+            }
+        }
+        public List<Fillial> GetAllFillials()
+        {
+            using (var db = new LibraryContext())
+            {
+                //var cat = new List<AuthorObs>();
+                var cat = db.Fillial;
                 return cat.ToList();
             }
         }
@@ -50,13 +219,13 @@ namespace MadelykLibrary
                 db.SaveChanges();
             }
         }
-        public void AddReader(Reader reader, Adress adress)
+        public void AddReader(Reader reader, Adress adress, Fillial fillial)
         {
             using (var db = new LibraryContext())
             {
+                adress.Fillal = db.Fillial.ToList().Find(x => x.Id==fillial.Id);
                 adress.Id = Guid.NewGuid();
                 db.Adresses.Add(adress);
-
                 db.SaveChanges();
                 reader.Id = Guid.NewGuid();
                 reader.Adress = db.Adresses.ToList().Find(x =>x.Id == adress.Id);
@@ -178,8 +347,36 @@ namespace MadelykLibrary
                     {
                         item.Finish_reading = DateTime.Now;
                         item.Status = "Finish";
+                        
+                        var checkPenny = (item.Finish_reading - item.Start_reading).Value.Days;
+                        if (checkPenny < 0 || checkPenny >= -5)
+                        {
+                            var penny = new Penny()
+                            {
+                                Id = Guid.NewGuid(),
+                                Price = 10,
+                                pennyStat = db.PennyStat.ToList().Find(x => x.Count_Day_Min == 6)
+                            };
+                            db.Penny.Add(penny);
+                          //  db.SaveChanges();
+                        }                    
+                        
+                        if (checkPenny < -11)
+                        {
+
+                            var penny = new Penny()
+                            {
+                                Id = Guid.NewGuid(),
+                                Price = 50,
+                                pennyStat = db.PennyStat.ToList().Find(x => x.Count_Day_Min == 6)
+                            };
+                            db.Penny.Add(penny);
+                           // db.SaveChanges();
+                            item.penny = db.Penny.ToList().Find(x => x.Id == penny.Id);
+                        }
                         break;
                     }
+                 
                 }
                 //var cart = db.Carts.SingleOrDefault(x => x.Reader.Name == addReaderNameForReturnBook && x.Reader.Surname == addReaderSurNameForReturnBook && x.Book.Id == selectedBookForGive.Id);
                 //cart.Finish_reading = DateTime.Now;
@@ -213,5 +410,6 @@ namespace MadelykLibrary
             }
             return ForReturn;
         }
+
     }
 }

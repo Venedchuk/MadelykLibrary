@@ -19,5 +19,10 @@ namespace MadelykLibrary
         public DbSet<Author> Authors { get; set; }
         public DbSet<Reader> Readers { get; set; }
         public DbSet<Adress> Adresses { get; set; }
+        public DbSet<Fillial> Fillial { get; set; }
+        public DbSet<StatFillial> StatFillial { get; set; }
+        public DbSet<Penny> Penny { get; set; }
+        public DbSet<PennyStat> PennyStat { get; set; }
+
     }
 }

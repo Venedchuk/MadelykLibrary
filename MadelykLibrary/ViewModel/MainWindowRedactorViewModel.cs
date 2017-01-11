@@ -1,18 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 using MadelykLibrary.Model;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 
 namespace MadelykLibrary
 {
@@ -22,7 +12,8 @@ namespace MadelykLibrary
         public ObservableCollection<Category> Categories { get; set; }
         public ObservableCollection<Author> Authors { get; set;}
         public ObservableCollection<Book> BooksFromCategory { get; set; }
-        
+        public ObservableCollection<Fillial> Fillials { get; set; }
+
         public ObservableCollection<Book> Books { get; set; }
         public ObservableCollection<Book> BooksWhatReading { get; set; }
         public ObservableCollection<CartObs> CartGrid { get; set; }
@@ -31,7 +22,6 @@ namespace MadelykLibrary
         {
             Update();
             Books = new ObservableCollection<Book>(connect.GetAllBooks());
-            
         }
 
         private void Update()
@@ -42,9 +32,12 @@ namespace MadelykLibrary
             Categories = new ObservableCollection<Category>(connect.GetAllCategory());
             RaisePropertyChanged("Categories");
             Authors = new ObservableCollection<Author>(connect.GetAllAuthors());
+            Fillials = new ObservableCollection<Fillial>(connect.GetAllFillials());
+            RaisePropertyChanged("Fillials");
             BooksFromCategory = new ObservableCollection<Book>();
             RaisePropertyChanged("Authors");
             var SelectedAuthor = new Author();
+
 
         }
         public string AddAuthorName { get; set; }
@@ -62,8 +55,9 @@ namespace MadelykLibrary
                     var author = new Author()
                     {
                         Name = AddAuthorName,
-                        Surname = AddAuthorSurname
+                        Surname = AddAuthorSurname,
                     };
+                    //connect.Initialize();
                     connect.AddAuthor(author);
                     Update();
                     RaisePropertyChanged("AddAuthorInfo");
@@ -179,7 +173,6 @@ namespace MadelykLibrary
             }
         }
 
-
         private Category _selectedCategory;
         public Category SelectedCategory
         {
@@ -203,6 +196,19 @@ namespace MadelykLibrary
                 if (_selectedAuthor == value) return;
                 _selectedAuthor = value;
                 RaisePropertyChanged("SelectedAuthor");
+
+            }
+        }
+         private Fillial _selectedFillial;
+        public Fillial SelectedFillial
+        {
+            get { return _selectedFillial; }
+
+            set
+            {
+                if (_selectedFillial == value) return;
+                _selectedFillial = value;
+                RaisePropertyChanged("SelectedFillial");
 
             }
         }
@@ -234,9 +240,9 @@ namespace MadelykLibrary
                     {
                         City = AddReaderCity,
                         Street = AddReaderStreet,
-                        House_number = AddReaderNumber
+                        House_number = AddReaderNumber,
                     };
-                    connect.AddReader(reader,adress);
+                    connect.AddReader(reader,adress,SelectedFillial);
                     Update();
                     RaisePropertyChanged("AddReaderInfo");
 
@@ -298,7 +304,6 @@ namespace MadelykLibrary
             }
         }
 
-        
         private RelayCommand _findBookForCriteria;
         public RelayCommand FindBookForCriteria
         {
@@ -382,7 +387,6 @@ namespace MadelykLibrary
             }
         }
 
-
         private Book _selectedBookForGive;
         public Book SelectedBookForGive
         {
@@ -396,7 +400,6 @@ namespace MadelykLibrary
 
             }
         }
-
 
         private RelayCommand _printCart;
         public RelayCommand PrintCart
@@ -427,7 +430,7 @@ namespace MadelykLibrary
             }
         }
 
-         private RelayCommand _getStat;
+        private RelayCommand _getStat;
         public RelayCommand GetStat
         {
             get

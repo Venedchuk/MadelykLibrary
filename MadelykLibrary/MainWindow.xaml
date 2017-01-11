@@ -7,7 +7,7 @@
     xmlns:nmsp="clr-namespace:MadelykLibrary"
     Title="Library Redactor"
     Width="548.667"
-    Height="724"
+    Height="725"
     ResizeMode="NoResize"
     mc:Ignorable="d">
 
@@ -17,7 +17,7 @@
     <Window.DataContext>
         <nmsp:MainWindowRedactorViewModel />
     </Window.DataContext>
-    <Grid Background="{StaticResource background}">
+    <Grid Margin="0,0,4,0" Background="{StaticResource background}">
         <TabControl Margin="10" Background="Transparent">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
@@ -50,7 +50,7 @@
                 Margin="62,0,-62,0"
                 VerticalAlignment="Top"
                 Header="General">
-                <Grid>
+                <Grid Margin="0,0,-9,-7">
                     <Border
                         Margin="59,14,19,412"
                         BorderBrush="Black"
@@ -593,6 +593,19 @@
                                 FlowDirection="RightToLeft"
                                 ItemsSource="{Binding Authors}"
                                 SelectedItem="{Binding SelectedAuthor}" />
+                            <ComboBox
+                                x:Name="textBox_Copy33"
+                                Width="120"
+                                Height="28"
+                                Margin="79,325,0,-208"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Background="#AAAAAAAA"
+                                DisplayMemberPath="Name"
+                                ItemsSource="{Binding Path=Fillials}"
+                                SelectedItem="{Binding Path=SelectedFillial}" />
                             <Button
                                 x:Name="label3"
                                 Width="114"
@@ -642,14 +655,6 @@
                                 VerticalAlignment="Top"
                                 Content="count:"
                                 FontWeight="Bold" />
-                            <Label
-                                x:Name="label6_Copy3"
-                                Width="63"
-                                Margin="204,114,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Content="author:"
-                                FontWeight="Bold" />
 
 
                             <Label
@@ -660,6 +665,24 @@
                                 VerticalAlignment="Top"
                                 Content="category:"
                                 FontWeight="Bold" />
+                            <Label
+                                x:Name="label6_Copy3"
+                                Width="63"
+                                Margin="204,114,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="author:"
+                                FontWeight="Bold" />
+                            <Label
+                                x:Name="label6_Copy333"
+                                Width="63"
+                                Margin="16,330,0,-211"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="Fillial:"
+                                FontWeight="Bold" />
+
+
                         </Grid>
                     </Border>
                     <Border
@@ -927,7 +950,102 @@
                 </Grid>
             </TabItem>
 
-
+            <TabItem Margin="66,0,-66,0" Header="Penny" >
+                <Border
+                        Margin="59,24,19,306"
+                        BorderBrush="Black"
+                        BorderThickness="2">
+                    <Grid
+                            Width="439"
+                            Height="305"
+                            Margin="-2,1,-6,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top">
+                        <TextBox
+                                x:Name="textBvox4s"
+                                Width="105"
+                                Height="28"
+                                Margin="189,10,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Background="#AAAAAAAA"
+                                FlowDirection="RightToLeft"
+                                RenderTransformOrigin="-0.142,0.607"
+                                Text="{Binding AddReaderNameForReturnBook}"
+                                TextAlignment="Center"
+                                TextWrapping="Wrap" />
+                        <TextBox
+                                x:Name="textBozx6a"
+                                Width="105"
+                                Height="28"
+                                Margin="309,10,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Background="#AAAAAAAA"
+                                FlowDirection="RightToLeft"
+                                RenderTransformOrigin="-0.142,0.607"
+                                Text="{Binding AddReaderSurNameForReturnBook}"
+                                TextAlignment="Center"
+                                TextWrapping="Wrap" />
+                        <Button
+                                x:Name="labelx1d"
+                                Width="114"
+                                Height="34"
+                                Margin="10,49,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Command="{Binding ReturnBook}"
+                                Content="Oplata"
+                                FontFamily="Palatino Linotype"
+                                FontSize="18" />
+                        <Label
+                                x:Name="lazbel16x"
+                                Width="57"
+                                Margin="132,10,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="reader:"
+                                FontWeight="Bold" />
+                        <Label
+                                x:Name="label6_xCopy13w"
+                                Width="56"
+                                Margin="230,96,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="penny:"
+                                FontWeight="Bold" />
+                        <ComboBox
+                                x:Name="textBox_Cdopy11r"
+                                Width="120"
+                                Height="28"
+                                Margin="292,94,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Background="#AAAAAAAA"
+                                DisplayMemberPath="Name"
+                                FlowDirection="RightToLeft"
+                                ItemsSource="{Binding BooksWhatReading}"
+                                SelectedItem="{Binding SelectedBookForGive}" />
+                        <Button
+                                x:Name="label_Copay1t"
+                                Width="98"
+                                Height="32"
+                                Margin="298,44,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Command="{Binding FindPenny}"
+                                Content="Find"
+                                FontFamily="Palatino Linotype"
+                                FontSize="18" />
+                    </Grid>
+                </Border>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
