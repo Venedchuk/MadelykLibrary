@@ -523,6 +523,17 @@
                                 VerticalAlignment="Top"
                                 Content="surname:"
                                 FontWeight="Bold" />
+                            <Button
+                                x:Name="label12_Copy"
+                                Width="47"
+                                Height="14"
+                                Margin="401,-21,-51,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Command="{Binding init}"
+                                Content="init5"
+                                FontFamily="Palatino Linotype"
+                                FontSize="10" />
 
                         </Grid>
                     </Border>
@@ -950,99 +961,99 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Margin="66,0,-66,0" Header="Penny" >
+            <TabItem Margin="66,0,-66,0" Header="Penny">
                 <Border
-                        Margin="59,24,19,306"
-                        BorderBrush="Black"
-                        BorderThickness="2">
+                    Margin="59,24,19,340"
+                    BorderBrush="Black"
+                    BorderThickness="2">
                     <Grid
-                            Width="439"
-                            Height="305"
-                            Margin="-2,1,-6,0"
+                        Width="439"
+                        Height="305"
+                        Margin="-2,1,-6,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                        <TextBox
+                            x:Name="textBvox4s"
+                            Width="105"
+                            Height="28"
+                            Margin="189,10,0,0"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Top">
+                            VerticalAlignment="Top"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#AAAAAAAA"
+                            FlowDirection="RightToLeft"
+                            RenderTransformOrigin="-0.142,0.607"
+                            Text="{Binding AddReaderNameForReturnBook}"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap" />
                         <TextBox
-                                x:Name="textBvox4s"
-                                Width="105"
-                                Height="28"
-                                Margin="189,10,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center"
-                                Background="#AAAAAAAA"
-                                FlowDirection="RightToLeft"
-                                RenderTransformOrigin="-0.142,0.607"
-                                Text="{Binding AddReaderNameForReturnBook}"
-                                TextAlignment="Center"
-                                TextWrapping="Wrap" />
-                        <TextBox
-                                x:Name="textBozx6a"
-                                Width="105"
-                                Height="28"
-                                Margin="309,10,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center"
-                                Background="#AAAAAAAA"
-                                FlowDirection="RightToLeft"
-                                RenderTransformOrigin="-0.142,0.607"
-                                Text="{Binding AddReaderSurNameForReturnBook}"
-                                TextAlignment="Center"
-                                TextWrapping="Wrap" />
+                            x:Name="textBozx6a"
+                            Width="105"
+                            Height="28"
+                            Margin="309,10,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#AAAAAAAA"
+                            FlowDirection="RightToLeft"
+                            RenderTransformOrigin="-0.142,0.607"
+                            Text="{Binding AddReaderSurNameForReturnBook}"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap" />
                         <Button
-                                x:Name="labelx1d"
-                                Width="114"
-                                Height="34"
-                                Margin="10,49,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Command="{Binding ReturnBook}"
-                                Content="Oplata"
-                                FontFamily="Palatino Linotype"
-                                FontSize="18" />
+                            x:Name="labelx1d"
+                            Width="114"
+                            Height="34"
+                            Margin="10,49,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding Pay}"
+                            Content="Pay"
+                            FontFamily="Palatino Linotype"
+                            FontSize="18" />
                         <Label
-                                x:Name="lazbel16x"
-                                Width="57"
-                                Margin="132,10,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Content="reader:"
-                                FontWeight="Bold" />
+                            x:Name="lazbel16x"
+                            Width="57"
+                            Margin="132,10,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="reader:"
+                            FontWeight="Bold" />
                         <Label
-                                x:Name="label6_xCopy13w"
-                                Width="56"
-                                Margin="230,96,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Content="penny:"
-                                FontWeight="Bold" />
+                            x:Name="label6_xCopy13w"
+                            Width="56"
+                            Margin="230,96,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="penny:"
+                            FontWeight="Bold" />
                         <ComboBox
-                                x:Name="textBox_Cdopy11r"
-                                Width="120"
-                                Height="28"
-                                Margin="292,94,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center"
-                                Background="#AAAAAAAA"
-                                DisplayMemberPath="Name"
-                                FlowDirection="RightToLeft"
-                                ItemsSource="{Binding BooksWhatReading}"
-                                SelectedItem="{Binding SelectedBookForGive}" />
+                            x:Name="textBox_Cdopy11r"
+                            Width="120"
+                            Height="28"
+                            Margin="292,94,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#AAAAAAAA"
+                            DisplayMemberPath="Price"
+                            FlowDirection="RightToLeft"
+                            ItemsSource="{Binding PennyNotPay}"
+                            SelectedItem="{Binding Path=SelectedPenny}" />
                         <Button
-                                x:Name="label_Copay1t"
-                                Width="98"
-                                Height="32"
-                                Margin="298,44,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Command="{Binding FindPenny}"
-                                Content="Find"
-                                FontFamily="Palatino Linotype"
-                                FontSize="18" />
+                            x:Name="label_Copay1t"
+                            Width="98"
+                            Height="32"
+                            Margin="298,44,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding FindPenny}"
+                            Content="Find"
+                            FontFamily="Palatino Linotype"
+                            FontSize="18" />
                     </Grid>
                 </Border>
             </TabItem>

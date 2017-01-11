@@ -16,6 +16,7 @@ namespace MadelykLibrary
 
         public ObservableCollection<Book> Books { get; set; }
         public ObservableCollection<Book> BooksWhatReading { get; set; }
+        public ObservableCollection<Penny> PennyNotPay { get; set; }
         public ObservableCollection<CartObs> CartGrid { get; set; }
 
         public MainWindowRedactorViewModel()
@@ -63,6 +64,18 @@ namespace MadelykLibrary
                     RaisePropertyChanged("AddAuthorInfo");
 
                 }, () => (AddAuthorName != null && AddAuthorSurname != null)));
+
+            }
+        }
+        public RelayCommand init
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    connect.Initialize();
+                   
+                });
 
             }
         }
@@ -362,7 +375,35 @@ namespace MadelykLibrary
                 }, () => (SelectedBookForGive != null)));
             }
         }
-        
+        private RelayCommand _pay;
+        public RelayCommand Pay
+        {
+            get
+            {
+                return _pay ?? (_pay = new RelayCommand(() =>
+                {
+                    connect.Pay(SelectedPenny);
+                    RaisePropertyChanged("PennyNotPay");
+
+                }, () => (SelectedPenny != null)));
+            }
+        }
+
+        private RelayCommand _findPenny;
+        public RelayCommand FindPenny
+        {
+            get
+            {
+                return _findPenny ?? (_findPenny = new RelayCommand(() =>
+                {
+                    PennyNotPay = connect.GetPenny(AddReaderNameForReturnBook, AddReaderSurNameForReturnBook);
+                    RaisePropertyChanged("PennyNotPay");
+
+
+                }));
+            }
+        }
+
         private RelayCommand _findBookWhatReading;
         public RelayCommand FindBookWhatReading
         {
@@ -395,11 +436,21 @@ namespace MadelykLibrary
             {
                 if (_selectedBookForGive == value) return;
                 _selectedBookForGive = value;
-
                 RaisePropertyChanged("SelectedBookForGive");
-
             }
         }
+        private Penny _selectedPenny;
+        public Penny SelectedPenny
+        {
+            get { return _selectedPenny; }
+            set
+            {
+                if (_selectedPenny == value) return;
+                _selectedPenny = value;
+                RaisePropertyChanged("SelectedPenny");
+            }
+        }
+
 
         private RelayCommand _printCart;
         public RelayCommand PrintCart

@@ -65,9 +65,10 @@ namespace MadelykLibrary
     public class Penny
     {
         public Guid Id { get; set; }
-      //  public virtual Cart Cart { get; set; }
+        //  public virtual Cart Cart { get; set; }
         public int Price { get; set; }
         public virtual PennyStat pennyStat { get; set; }
+        public string payed { get; set; }
     }
     public class PennyStat
     {

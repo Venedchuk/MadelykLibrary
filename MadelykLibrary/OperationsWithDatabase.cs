@@ -128,27 +128,7 @@ namespace MadelykLibrary
                     Count_Day_Min = 0,
                 };
                 db.PennyStat.Add(pennystat0);
-                var penny1 = new Penny()
-                {
-                    Id = Guid.NewGuid(),
-                    pennyStat = pennystat1,
-                    Price = 10
-                };
-                db.Penny.Add(penny1);
-                var penny2 = new Penny()
-                {
-                    Id = Guid.NewGuid(),
-                    pennyStat = pennystat2,
-                    Price = 30
-                };
-                db.Penny.Add(penny2);
-                var penny3 = new Penny()
-                {
-                    Id = Guid.NewGuid(),
-                    pennyStat = pennystat3,
-                    Price = 50
-                };
-                db.Penny.Add(penny3);
+
                 var penny0 = new Penny()
                 {
                     Id = Guid.NewGuid(),
@@ -184,7 +164,7 @@ namespace MadelykLibrary
         {
             using (var db = new LibraryContext())
             {
-                if (db.Categorys != null)
+                if (db.Categorys.FirstOrDefault() != null)
                     return db.Categorys.ToList();
 
                 else
@@ -357,6 +337,7 @@ namespace MadelykLibrary
                                 Price = 10,
                                 pennyStat = db.PennyStat.ToList().Find(x => x.Count_Day_Min == 6)
                             };
+                            item.penny = penny;
                             db.Penny.Add(penny);
                           //  db.SaveChanges();
                         }                    
@@ -374,6 +355,7 @@ namespace MadelykLibrary
                            // db.SaveChanges();
                             item.penny = db.Penny.ToList().Find(x => x.Id == penny.Id);
                         }
+                        
                         break;
                     }
                  
@@ -384,6 +366,36 @@ namespace MadelykLibrary
                 db.SaveChanges();
             }
 
+        }
+
+        internal void Pay(Penny selectedPenny)
+        {
+            using (var db = new LibraryContext())
+            {
+                selectedPenny.payed = "pay";
+                var origin = db.Penny.Find(selectedPenny.Id);
+                
+                db.Entry(origin).CurrentValues.SetValues(selectedPenny);
+                db.SaveChanges();
+            }
+
+        }
+
+        internal ObservableCollection<Penny> GetPenny(string addReaderNameForReturnBook, string addReaderSurNameForReturnBook)
+        {
+            using (var db = new LibraryContext())
+            {
+                var cart = (db.Carts.Include(x => x.penny).Include(x => x.Reader).ToList());
+                var ret = cart.FindAll(x => x.penny.payed != "pay" || x.Reader.Surname == addReaderSurNameForReturnBook || x.Reader.Name == addReaderNameForReturnBook).Select(x => x.penny);
+
+                var penny = new ObservableCollection<Penny>();
+                foreach (var item in ret)
+                {
+                    if (item.payed != "pay")
+                        penny.Add(item);
+                }
+                return penny;
+            }
         }
 
         internal ObservableCollection<CartObs> GetCartUser(string readerNamePrint, string readerSurNamePrint, bool isFinishRead)
