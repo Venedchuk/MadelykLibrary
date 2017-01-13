@@ -22,7 +22,7 @@ namespace MadelykLibrary
         public MainWindowRedactorViewModel()
         {
             Update();
-            Books = new ObservableCollection<Book>(connect.GetAllBooks());
+            
         }
 
         private void Update()
@@ -38,7 +38,7 @@ namespace MadelykLibrary
             BooksFromCategory = new ObservableCollection<Book>();
             RaisePropertyChanged("Authors");
             var SelectedAuthor = new Author();
-
+            Books = new ObservableCollection<Book>(connect.GetAllBooks());
 
         }
         public string AddAuthorName { get; set; }

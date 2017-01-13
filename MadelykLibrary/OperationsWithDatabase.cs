@@ -386,15 +386,26 @@ namespace MadelykLibrary
             using (var db = new LibraryContext())
             {
                 var cart = (db.Carts.Include(x => x.penny).Include(x => x.Reader).ToList());
-                var ret = cart.FindAll(x => x.penny.payed != "pay" || x.Reader.Surname == addReaderSurNameForReturnBook || x.Reader.Name == addReaderNameForReturnBook).Select(x => x.penny);
-
-                var penny = new ObservableCollection<Penny>();
-                foreach (var item in ret)
+                try
                 {
-                    if (item.payed != "pay")
-                        penny.Add(item);
+                    var ret = cart.FindAll(x => x.Reader.Surname == addReaderSurNameForReturnBook || x.Reader.Name == addReaderNameForReturnBook).Select(x => x.penny);
+
+                    var penny = new ObservableCollection<Penny>();
+                    ret.Last();
+                    foreach (var item in ret)
+                    {
+                        if(item!=null)
+                        if (item.payed != "pay")
+                            penny.Add(item);
+                    }
+                    return penny;
                 }
-                return penny;
+                catch (Exception)
+                {
+                    return new ObservableCollection<Penny>();
+                }
+                
+                
             }
         }
 
