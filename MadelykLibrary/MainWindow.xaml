@@ -963,12 +963,12 @@
 
             <TabItem Margin="66,0,-66,0" Header="Penny">
                 <Border
-                    Margin="59,24,19,340"
+                    Margin="59,24,19,2"
                     BorderBrush="Black"
                     BorderThickness="2">
                     <Grid
                         Width="439"
-                        Height="305"
+                        Height="271"
                         Margin="-2,1,-6,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
@@ -1054,6 +1054,32 @@
                             Content="Find"
                             FontFamily="Palatino Linotype"
                             FontSize="18" />
+                        <ListView
+                            x:Name="textBox_Codpy7"
+                            Width="256"
+                            Height="113"
+                            Margin="42,298,0,-140"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            HorizontalContentAlignment="Right"
+                            VerticalContentAlignment="Center"
+                            Background="#AAAAAAAA"
+                            DisplayMemberPath="Name"
+                            FlowDirection="RightToLeft"
+                            ItemsSource="{Binding Path=Books}" />
+                        <ListView
+                            x:Name="textBox_Coddpy7"
+                            Width="256"
+                            Height="113"
+                            Margin="42,158,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            HorizontalContentAlignment="Right"
+                            VerticalContentAlignment="Center"
+                            Background="#AAAAAAAA"
+                            DisplayMemberPath="Name"
+                            FlowDirection="RightToLeft"
+                            ItemsSource="{Binding Path=Readers}" />
                     </Grid>
                 </Border>
             </TabItem>

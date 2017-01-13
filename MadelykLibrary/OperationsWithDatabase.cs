@@ -150,6 +150,18 @@ namespace MadelykLibrary
             }
         }
 
+        internal List<Reader> GetAllReaders()
+        {
+            using (var db = new LibraryContext())
+            {
+                if (db.Readers.FirstOrDefault() != null)
+                    return db.Readers.ToList();
+
+                else
+                    return new List<Reader>();
+            }
+        }
+
         public void AddAuthor(Author a)
         {
             using (var db = new LibraryContext())

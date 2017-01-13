@@ -15,6 +15,7 @@ namespace MadelykLibrary
         public ObservableCollection<Fillial> Fillials { get; set; }
 
         public ObservableCollection<Book> Books { get; set; }
+        public ObservableCollection<Reader> Readers { get; set; }
         public ObservableCollection<Book> BooksWhatReading { get; set; }
         public ObservableCollection<Penny> PennyNotPay { get; set; }
         public ObservableCollection<CartObs> CartGrid { get; set; }
@@ -22,7 +23,8 @@ namespace MadelykLibrary
         public MainWindowRedactorViewModel()
         {
             Update();
-            
+            Books = new ObservableCollection<Book>(connect.GetAllBooks());
+            Readers = new ObservableCollection<Reader>(connect.GetAllReaders());
         }
 
         private void Update()
@@ -38,7 +40,9 @@ namespace MadelykLibrary
             BooksFromCategory = new ObservableCollection<Book>();
             RaisePropertyChanged("Authors");
             var SelectedAuthor = new Author();
+            RaisePropertyChanged("Books");
             Books = new ObservableCollection<Book>(connect.GetAllBooks());
+            Readers = new ObservableCollection<Reader>(connect.GetAllReaders());
 
         }
         public string AddAuthorName { get; set; }
@@ -144,6 +148,7 @@ namespace MadelykLibrary
                     connect.AddBook(book);
                     Update();
                     RaisePropertyChanged("AddBookInfo");
+                    RaisePropertyChanged("Books");
                 }, () => (AddBookName != null&& countbook>0&& SelectedCategory!=null&& SelectedAuthor!= null)));
 
             }

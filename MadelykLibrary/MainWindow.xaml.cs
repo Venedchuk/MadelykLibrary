@@ -18,6 +18,7 @@ namespace MadelykLibrary
         {
             PrintDialog printDlg = new PrintDialog();
             printDlg.PrintVisual(dataGrid, "Grid Printing.");
+
         }
     }
 }
